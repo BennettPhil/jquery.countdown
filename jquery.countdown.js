@@ -111,7 +111,8 @@
         label_mm: 'minutes',
         label_ss: 'seconds',
         separator: ':',
-        separator_days: ','
+        separator_days: ',',
+        dd_leading_zeros: 0
     };
 
     function CountDown(element, options) {
@@ -354,6 +355,16 @@
         },
 
         markup: function () {
+            // Generate Days spans
+            var days_html = '<span class="dd"></span>';
+
+            if (this.options.dd_leading_zeros > 0) {
+                days_html = '';
+                for (i = 0; i < this.options.dd_leading_zeros; i++) {
+                    days_html += '<span class="dd-' + i + '"></span>';
+                }
+            }
+
             // Prepare the HTML content of the <time> element.
             var html = [
                 '<span class="item item-dd">',
